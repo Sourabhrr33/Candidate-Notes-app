@@ -3,7 +3,7 @@ import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import Note from "../models/Note";
 import Notification from "../models/Notification";
-import { io } from "../index";  // import your io instance
+import { io } from "../index";  
 
 // GET /api/notes/:candidateId
 export const getNotes = async (req: AuthRequest, res: Response) => {

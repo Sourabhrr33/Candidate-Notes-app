@@ -17,7 +17,6 @@ export const register = async (req: Request, res: Response) => {
     const user = await User.create({ name, email, password: hashed });
     res.status(201).json({ message: "User registered", user: { _id: user._id, name, email } });
   }catch (err) {
-        // Add this for better error output:
         console.error("Registration Error:", err);
         res.status(500).json({ message: "Registration error", error: (err as Error).message || err });
       }
@@ -34,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(400).json({ message: "Invalid email or password" });
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "2d" });
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "10m" });
     res.json({ token, user: { _id: user._id, name: user.name, email: user.email } });
   } catch (err) {
     res.status(500).json({ message: "Login error", error: err });

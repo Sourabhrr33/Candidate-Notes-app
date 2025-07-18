@@ -1,11 +1,11 @@
 // src/controllers/notificationController.ts
 import { Response } from "express";
-import { AuthRequest } from "../middleware/auth";    // import the extended type
+import { AuthRequest } from "../middleware/auth";   
 import Notification from "../models/Notification";
 
 // GET /api/notifications
 export const getNotifications = async (req: AuthRequest, res: Response) => {
-  const userId = req.userId;                         // <-- read req.userId
+  const userId = req.userId;                         
   if (!userId) {
     console.error("getNotifications: no req.userId", req.headers.authorization);
     return res.status(401).json({ message: "Not authorized" });
